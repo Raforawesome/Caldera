@@ -1,4 +1,5 @@
-#![allow(non_snake_case)]
+#![allow(non_snake_case, unused, dead_code)]
+#![feature(get_mut_unchecked)]
 
 mod parser;
 
