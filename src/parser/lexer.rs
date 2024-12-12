@@ -1,5 +1,32 @@
 //! Module to tokenize raw markdown file input.
 
+use std::rc::Rc;
+
+pub struct TokenNode<'a> {
+    pub token: Token<'a>,
+    pub next: Option<Rc<TokenNode<'a>>>,
+}
+
+impl<'a> TokenNode<'a> {
+    pub fn new(token: Token<'a>) -> Self {
+        Self { token, next: None }
+    }
+}
+
+pub struct TokenStream<'a> {
+    first: Rc<Option<TokenNode<'a>>>,
+    last: Rc<Option<TokenNode<'a>>>,
+}
+
+impl<'a> TokenStream<'a> {
+    pub fn new() -> Self {
+        Self {
+            first: Rc::new(None),
+            last: Rc::new(None),
+        }
+    }
+}
+
 pub enum Token<'a> {
     ToggleItalicBold,
     ToggleBold,
@@ -15,6 +42,6 @@ pub enum Token<'a> {
     OlItem,
 }
 
-pub fn tokenize<'a>(text: &'a str) -> TokenStream {
+pub fn tokenize(text: &str) -> TokenStream {
     todo!()
 }
