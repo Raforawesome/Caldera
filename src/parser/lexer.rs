@@ -41,6 +41,7 @@ impl<'a> TokenStream<'a> {
     }
 }
 
+#[derive(Clone, Copy)]
 pub enum Token<'a> {
     ToggleItalicBold,
     ToggleBold,
