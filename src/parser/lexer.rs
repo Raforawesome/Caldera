@@ -39,6 +39,26 @@ impl<'a> TokenStream<'a> {
         }
         self.last = Some(new);
     }
+
+    pub fn iter(&self) -> TokenStreamIter<'a> {
+        TokenStreamIter {
+            current: self.first.clone(),
+        }
+    }
+}
+
+pub struct TokenStreamIter<'a> {
+    pub current: Option<Rc<TokenNode<'a>>>,
+}
+
+impl<'a> Iterator for TokenStreamIter<'a> {
+    type Item = Token<'a>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let token_opt: Option<Self::Item> = self.current.clone().map(|rc| rc.token);
+        self.current = self.current.clone().unwrap().next.clone();
+        token_opt
+    }
 }
 
 #[derive(Clone, Copy)]
