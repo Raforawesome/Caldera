@@ -13,12 +13,12 @@ impl<'a> TokenNode<'a> {
     }
 }
 
-pub struct TokenStream<'a> {
+pub struct TokenSequence<'a> {
     first: Option<Rc<TokenNode<'a>>>,
     last: Option<Rc<TokenNode<'a>>>,
 }
 
-impl<'a> TokenStream<'a> {
+impl<'a> TokenSequence<'a> {
     pub fn new() -> Self {
         Self {
             first: None,
@@ -40,18 +40,18 @@ impl<'a> TokenStream<'a> {
         self.last = Some(new);
     }
 
-    pub fn iter(&self) -> TokenStreamIter<'a> {
-        TokenStreamIter {
+    pub fn iter(&self) -> TokenSeqIter<'a> {
+        TokenSeqIter {
             current: self.first.clone(),
         }
     }
 }
 
-pub struct TokenStreamIter<'a> {
+pub struct TokenSeqIter<'a> {
     pub current: Option<Rc<TokenNode<'a>>>,
 }
 
-impl<'a> Iterator for TokenStreamIter<'a> {
+impl<'a> Iterator for TokenSeqIter<'a> {
     type Item = Token<'a>;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -77,6 +77,7 @@ pub enum Token<'a> {
     OlItem,
 }
 
-pub fn tokenize(text: &str) -> TokenStream {
+pub fn tokenize(text: &str) -> TokenSequence {
+    let mut stream: TokenSequence = TokenSequence::new();
     todo!()
 }
