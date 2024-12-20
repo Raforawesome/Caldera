@@ -12,6 +12,7 @@ serde = { version = "1.0.197", features = ["derive"] }
 dioxus = { version = "0.5", features = ["fullstack"] }
 
 dioxus-logger = "0.5.1"
+regex = "1.11.1"
 
 [features]
 default = []
